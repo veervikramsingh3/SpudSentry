@@ -1,0 +1,503 @@
+/* 
+  PotatoPathFinder Stylesheet
+  Created by: Ritika Chaudhary and Veer Vikram Singh
+*/
+
+:root {
+  /* Agriculture/Plant-themed color scheme */
+  --primary-color: #4a7c59;       /* Dark green */
+  --secondary-color: #8fb996;     /* Light green */
+  --accent-color: #d68c45;        /* Earth/potato brown */
+  --light-color: #e8f4ea;         /* Light mint */
+  --dark-color: #2c5530;          /* Deep forest green */
+  --danger-color: #c1433f;        /* Disease red */
+  --warning-color: #f1b434;       /* Warning yellow */
+  --success-color: #4bb462;       /* Healthy green */
+  --text-color: #333;
+  --light-text: #f8f9fa;
+  --border-radius: 0.5rem;
+  --transition-speed: 0.3s;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Base Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-color);
+  background-color: var(--light-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--dark-color);
+  font-weight: 600;
+}
+
+a {
+  color: var(--primary-color);
+  transition: all var(--transition-speed) ease;
+}
+
+a:hover {
+  color: var(--dark-color);
+  text-decoration: none;
+}
+
+/* Custom Button Styles */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--dark-color);
+  border-color: var(--dark-color);
+  color: white;
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: var(--dark-color);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: var(--light-color);
+  border-color: var(--secondary-color);
+  color: var(--dark-color);
+}
+
+.btn-accent {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: white;
+}
+
+.btn-accent:hover,
+.btn-accent:focus {
+  background-color: #c07a35;
+  border-color: #c07a35;
+  color: white;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--primary-color);
+  box-shadow: var(--box-shadow);
+}
+
+.navbar-brand {
+  color: white !important;
+  font-weight: 700;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all var(--transition-speed) ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(
+    to bottom right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: white;
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%238fb996" fill-opacity="0.2" d="M0,224L48,208C96,192,192,160,288,165.3C384,171,480,213,576,224C672,235,768,213,864,181.3C960,149,1056,107,1152,96C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+  background-size: cover;
+  background-position: bottom;
+  pointer-events: none;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+/* Cards */
+.card {
+  border-radius: var(--border-radius);
+  border: none;
+  box-shadow: var(--box-shadow);
+  transition: transform var(--transition-speed);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-header {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+}
+
+.feature-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-card .card-body {
+  flex: 1;
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+/* Image Upload Section */
+.upload-section {
+  background-color: white;
+  padding: 3rem 0;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.upload-container {
+  border: 2px dashed var(--secondary-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.upload-container:hover {
+  border-color: var(--primary-color);
+  background-color: var(--light-color);
+}
+
+.upload-icon {
+  font-size: 3rem;
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+#preview-image {
+  max-width: 100%;
+  max-height: 300px;
+  display: none;
+  margin: 1rem auto;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+/* Results Section */
+.result-card {
+  border-left: 5px solid;
+}
+
+.result-healthy {
+  border-left-color: var(--success-color);
+}
+
+.result-early-blight {
+  border-left-color: var(--warning-color);
+}
+
+.result-late-blight {
+  border-left-color: var(--danger-color);
+}
+
+.confidence-bar {
+  height: 10px;
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+.disease-image {
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+/* Gallery */
+.gallery-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform var(--transition-speed);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.gallery-disease-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 0.2rem 0.5rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.tag-healthy {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.tag-early-blight {
+  background-color: var(--warning-color);
+  color: var(--dark-color);
+}
+
+.tag-late-blight {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+/* About Page */
+.team-member {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.team-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 5px solid var(--light-color);
+  box-shadow: var(--box-shadow);
+  background-color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3rem;
+  margin: 0 auto 1rem;
+}
+
+.team-member h4 {
+  margin-bottom: 0.5rem;
+}
+
+.team-member p {
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
+/* Contact Form */
+.contact-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.contact-info {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  height: 100%;
+}
+
+.contact-info h3 {
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.contact-info-item {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.contact-info-item i {
+  margin-right: 0.8rem;
+  font-size: 1.2rem;
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark-color);
+  color: white;
+  padding: 3rem 0 1.5rem;
+}
+
+footer h5 {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+footer ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+footer ul li {
+  margin-bottom: 0.8rem;
+}
+
+footer a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+footer a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Charts */
+.chart-container {
+  position: relative;
+  margin: 2rem 0;
+  height: 300px;
+}
+
+/* Responsive Styles */
+@media (max-width: 991.98px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero {
+    padding: 3rem 0;
+  }
+  
+  .team-member {
+    margin-bottom: 3rem;
+  }
+  
+  .contact-info {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading Spinner */
+.loader {
+  border: 5px solid var(--light-color);
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 2rem auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.btn:focus, .form-control:focus {
+  box-shadow: 0 0 0 0.25rem rgba(74, 124, 89, 0.25);
+}

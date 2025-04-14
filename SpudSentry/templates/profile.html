@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h1 class="mb-4">My Profile</h1>
+            <div class="card shadow">
+                <div class="card-body">
+                    <h4>Account Information</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Username:</strong> {{ current_user.username }}</p>
+                            <p><strong>Email:</strong> {{ current_user.email }}</p>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <p><strong>Total Detections:</strong> {{ current_user.detections|length }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>My Detection History</h2>
+                {% if current_user.detections %}
+                <form method="POST" action="{{ url_for('clear_gallery') }}" onsubmit="return confirm('Are you sure you want to clear your entire gallery? This action cannot be undone.');">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt me-2"></i> Clear Gallery
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+            {% if current_user.detections %}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Date</th>
+                                <th>Image</th>
+                                <th>Disease</th>
+                                <th>Confidence</th>
+                                <th>Public/Private</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for detection in current_user.detections %}
+                            <tr>
+                                <td>{{ detection.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                                <td>
+                                    <a href="{{ url_for('static', filename='uploads/' + detection.filename) }}" target="_blank">
+                                        <img src="{{ url_for('static', filename='uploads/' + detection.filename) }}" alt="Potato Plant" class="img-thumbnail" style="max-width: 100px;">
+                                    </a>
+                                </td>
+                                <td>{{ detection.disease }}</td>
+                                <td>{{ "%.2f"|format(detection.confidence) }}%</td>
+                                <td>
+                                    <form method="POST" action="{{ url_for('toggle_visibility', detection_id=detection.id) }}">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                        <button type="submit" class="btn btn-sm {% if detection.is_public %}btn-success{% else %}btn-secondary{% endif %}">
+                                            {% if detection.is_public %}Public{% else %}Private{% endif %}
+                                        </button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a href="{{ url_for('result', id=detection.id) }}" class="btn btn-sm btn-info">View</a>
+                                        <form method="POST" action="{{ url_for('delete_detection', detection_id=detection.id) }}" onsubmit="return confirm('Are you sure you want to delete this detection?');">
+                                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <p>You haven't submitted any images for disease detection yet.</p>
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">Detect Disease Now</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

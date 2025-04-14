@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+
+{% block title %}Detection Result{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h1>Disease Detection Result</h1>
+                <p class="lead">Analysis of your potato plant image</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Result Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='uploads/' + result.filename) }}" class="card-img-top disease-image" alt="{{ result.disease }}">
+                    <div class="card-body">
+                        <h4 class="card-title">Uploaded Image</h4>
+                        <p class="card-text">Image processed on {{ result.timestamp.strftime('%B %d, %Y at %H:%M') }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="card result-card
+                    {% if result.disease == 'Healthy' %}result-healthy
+                    {% elif result.disease == 'Early Blight' %}result-early-blight
+                    {% elif result.disease == 'Late Blight' %}result-late-blight
+                    {% endif %}">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="card-title mb-0">Diagnosis</h3>
+                            {% if result.disease == 'Healthy' %}
+                                <span class="badge bg-success">Healthy</span>
+                            {% elif result.disease == 'Early Blight' %}
+                                <span class="badge bg-warning">Early Blight</span>
+                            {% elif result.disease == 'Late Blight' %}
+                                <span class="badge bg-danger">Late Blight</span>
+                            {% endif %}
+                        </div>
+                        
+                        <h5>Detection Result: {{ result.disease }}</h5>
+                        <p>Confidence: {{ result.confidence|round(2) }}%</p>
+                        
+                        <div class="progress mb-4">
+                            <div class="progress-bar 
+                                {% if result.disease == 'Healthy' %}bg-success
+                                {% elif result.disease == 'Early Blight' %}bg-warning
+                                {% elif result.disease == 'Late Blight' %}bg-danger
+                                {% endif %}" 
+                                role="progressbar" 
+                                style="width: {{ result.confidence }}%" 
+                                aria-valuenow="{{ result.confidence }}" 
+                                aria-valuemin="0" 
+                                aria-valuemax="100">
+                                {{ result.confidence|round(2) }}%
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5>Description</h5>
+                            <p>{{ result.description }}</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5>Treatment Recommendations</h5>
+                            <p>{{ result.treatment }}</p>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="{{ url_for('index') }}" class="btn btn-primary">
+                                <i class="fas fa-upload me-2"></i> Test Another Image
+                            </a>
+                            <a href="{{ url_for('gallery') }}" class="btn btn-outline-primary">
+                                <i class="fas fa-images me-2"></i> View Gallery
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Information Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="mb-4">More Information</h2>
+        
+        {% if result.disease == 'Healthy' %}
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Maintaining Healthy Plants</h5>
+                            <ul>
+                                <li>Water regularly but avoid overwatering</li>
+                                <li>Ensure proper soil nutrition with adequate fertilizer</li>
+                                <li>Use crop rotation to prevent soil-borne diseases</li>
+                                <li>Monitor for early signs of pest infestations</li>
+                                <li>Maintain proper spacing between plants for airflow</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Preventative Measures</h5>
+                            <ul>
+                                <li>Perform regular inspections for disease symptoms</li>
+                                <li>Use disease-free seed potatoes</li>
+                                <li>Apply preventative fungicides during high-risk periods</li>
+                                <li>Control weeds that may harbor pests or diseases</li>
+                                <li>Practice good field sanitation by removing plant debris</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Optimal Growing Conditions</h5>
+                            <ul>
+                                <li>Soil pH between 5.8 and 6.5</li>
+                                <li>Consistent moisture but well-drained soil</li>
+                                <li>Full sun exposure (6+ hours daily)</li>
+                                <li>Temperatures between 60-70°F (15-21°C)</li>
+                                <li>Regular fertilization with balanced nutrients</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        {% elif result.disease == 'Early Blight' %}
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Early Blight Information</h5>
+                            <p>Early blight (Alternaria solani) is a fungal disease that affects potato plants, particularly during warm, humid weather. It typically begins on older, lower leaves and progresses upward.</p>
+                            <p>The characteristic "target" or "bullseye" pattern of concentric rings within lesions is a key identifier of this disease.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Management Strategies</h5>
+                            <ul>
+                                <li>Remove and destroy infected plant material</li>
+                                <li>Apply fungicides containing chlorothalonil or copper</li>
+                                <li>Improve air circulation through proper plant spacing</li>
+                                <li>Water at the base of plants to keep foliage dry</li>
+                                <li>Rotate crops - avoid planting potatoes or tomatoes in the same location for 2-3 years</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Preventative Measures</h5>
+                            <ul>
+                                <li>Use certified disease-free seed potatoes</li>
+                                <li>Plant resistant varieties when available</li>
+                                <li>Maintain balanced soil nutrition</li>
+                                <li>Apply preventative fungicides before disease appears</li>
+                                <li>Avoid overhead irrigation which promotes leaf wetness</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        {% elif result.disease == 'Late Blight' %}
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Late Blight Information</h5>
+                            <p>Late blight (Phytophthora infestans) is a devastating disease that caused the Irish Potato Famine. It spreads rapidly in cool, wet conditions and can destroy entire fields in days if not controlled.</p>
+                            <p>The pathogen can affect all parts of the plant including stems, leaves, and tubers.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Urgent Control Measures</h5>
+                            <ul>
+                                <li>Apply appropriate fungicides immediately</li>
+                                <li>Remove and destroy infected plants to prevent spread</li>
+                                <li>Create a buffer zone around infected areas</li>
+                                <li>Harvest remaining potatoes as soon as possible</li>
+                                <li>Monitor weather forecasts for high-risk conditions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Long-term Management</h5>
+                            <ul>
+                                <li>Plant resistant varieties</li>
+                                <li>Use preventative fungicides during high-risk weather</li>
+                                <li>Properly dispose of cull piles and volunteer plants</li>
+                                <li>Improve field drainage to reduce humidity</li>
+                                <li>Practice crop rotation with 3-4 year cycles</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        
+        <div class="mt-4 text-center">
+            <a href="{{ url_for('gallery') }}" class="btn btn-primary">
+                <i class="fas fa-images me-2"></i> Browse More Cases
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

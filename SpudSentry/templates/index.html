@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="fade-in">PotatoPathFinder</h1>
+                <p class="fade-in">Advanced potato disease detection using artificial intelligence. Upload your potato plant images and get instant diagnosis and treatment recommendations.</p>
+                <a href="#upload-section" class="btn btn-light btn-lg rounded-pill shadow fade-in">
+                    <i class="fas fa-upload me-2"></i> Detect Disease Now
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Upload Section -->
+<section id="upload-section" class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-header text-center">
+                        <h2 class="mb-0">Upload Potato Plant Image</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="upload-form" action="{{ url_for('upload_image') }}" method="post" enctype="multipart/form-data">
+                            <div id="upload-container" class="upload-container mb-3">
+                                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                <h4>Drag & Drop or Click to Upload</h4>
+                                <p class="text-muted">Supported formats: JPG, JPEG, PNG</p>
+                                <input type="file" id="file-input" name="file" accept=".jpg,.jpeg,.png" style="display: none;" required>
+                                <img id="preview-image" class="mt-3" alt="Image Preview">
+                            </div>
+                            <div class="text-center">
+                                <button id="upload-button" type="submit" class="btn btn-primary btn-lg rounded-pill" disabled>
+                                    <i class="fas fa-search me-2"></i> Detect Disease
+                                </button>
+                                <div id="loading-indicator" class="loader mt-3" style="display: none;"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>How It Works</h2>
+            <p class="lead">Our advanced AI system helps you identify potato diseases in three simple steps</p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-upload feature-icon"></i>
+                        <h4>Upload Photo</h4>
+                        <p>Take a clear photo of your potato plant and upload it to our system.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-robot feature-icon"></i>
+                        <h4>AI Analysis</h4>
+                        <p>Our advanced neural network analyzes the image to detect disease patterns.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-clipboard-list feature-icon"></i>
+                        <h4>Get Results</h4>
+                        <p>Receive detailed diagnosis and treatment recommendations for your potato plants.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Disease Info Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Common Potato Diseases</h2>
+            <p class="lead">Learn about the most prevalent diseases affecting potato crops</p>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-warning me-2">Common</span>
+                            <h4 class="mb-0">Early Blight</h4>
+                        </div>
+                        <p>Early blight is caused by the fungus <em>Alternaria solani</em>. It appears as dark brown to black spots with concentric rings, creating a "target-spot" or "bull's-eye" pattern. These spots usually appear on lower, older leaves first.</p>
+                        <h5>Key Symptoms:</h5>
+                        <ul>
+                            <li>Dark, target-like spots on leaves</li>
+                            <li>Yellowing of leaves around lesions</li>
+                            <li>Premature defoliation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-danger me-2">Severe</span>
+                            <h4 class="mb-0">Late Blight</h4>
+                        </div>
+                        <p>Late blight is caused by the water mold <em>Phytophthora infestans</em>. This is the disease that caused the Irish Potato Famine. It appears as pale green, water-soaked lesions that quickly turn brown to black. White fungal growth may appear on leaf undersides in humid conditions.</p>
+                        <h5>Key Symptoms:</h5>
+                        <ul>
+                            <li>Water-soaked lesions that rapidly enlarge</li>
+                            <li>White fuzzy growth on leaf undersides</li>
+                            <li>Rapid death of affected tissues</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Project Info Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h2>About This Project</h2>
+                <p>PotatoPathFinder is a college project created by Ritika Chaudhary and Veer Vikram Singh as part of their computer science curriculum. This tool combines image processing techniques with machine learning to help farmers and agricultural researchers identify potato diseases quickly and accurately.</p>
+                <p>The system uses a convolutional neural network trained on thousands of potato plant images to recognize patterns associated with different diseases. The goal is to provide early detection and treatment recommendations to improve crop health and yield.</p>
+                <a href="{{ url_for('about') }}" class="btn btn-primary">
+                    <i class="fas fa-users me-2"></i> Meet The Team
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Project Contributors</h4>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="me-3" style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">RC</div>
+                            <div>
+                                <h5 class="mb-0">Ritika Chaudhary</h5>
+                                <p class="text-muted mb-0">Roll No: 2022000850</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="me-3" style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">VS</div>
+                            <div>
+                                <h5 class="mb-0">Veer Vikram Singh</h5>
+                                <p class="text-muted mb-0">Roll No: 2022007952</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

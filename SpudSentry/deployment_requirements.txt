@@ -1,0 +1,13 @@
+email-validator==2.0.0
+flask==2.3.3
+flask-login==0.6.2
+flask-sqlalchemy==3.1.1
+flask-wtf==1.2.1
+gunicorn==23.0.0
+numpy==1.26.0
+opencv-python==4.8.1.78
+pillow==10.1.0
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.23
+tensorflow==2.15.0
+werkzeug==2.3.7
